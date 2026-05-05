@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ShoppingBag, Users2, Calendar, User, LogOut, Target, Menu, X } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Users2, Calendar, User, LogOut, Target, Menu, X, Trophy } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +11,7 @@ const menuItems = [
   { name: "Missões", icon: Calendar, href: "/calendario" },
   { name: "Marketplace", icon: ShoppingBag, href: "/marketplace" },
   { name: "Equipes", icon: Users2, href: "/equipes" },
+  { name: "Ranking", icon: Trophy, href: "/ranking" },
 ];
 
 export function Sidebar() {
