@@ -94,24 +94,25 @@ export default function Home() {
                {/* Mockup do Dashboard Interno */}
                <div className="p-10 pt-24 space-y-6">
                   <div className="h-32 bg-white/5 rounded-3xl border border-white/5 p-6 flex items-center gap-4">
-                     <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center border border-primary/40">
-                        <Zap className="text-primary w-8 h-8" />
+                     <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center border border-primary/40 overflow-hidden">
+                        <img src="/peter.jpg" alt="PETER" className="w-full h-full object-cover" />
                      </div>
                      <div>
                         <p className="text-[10px] font-bold text-gray-500 uppercase">Patente Atual</p>
-                        <p className="text-2xl font-black italic uppercase">Major Delta</p>
+                        <p className="text-2xl font-black italic uppercase text-primary">Soldado</p>
+                        <p className="text-[10px] font-black uppercase text-white/40">PETER</p>
                      </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                      <div className="h-40 bg-white/5 rounded-3xl border border-white/5 p-6">
                         <Trophy className="text-primary w-6 h-6 mb-2" />
-                        <p className="text-2xl font-black">#04</p>
-                        <p className="text-[10px] font-bold text-gray-500 uppercase mt-1">Ranking</p>
+                        <p className="text-2xl font-black">NV 01</p>
+                        <p className="text-[10px] font-bold text-gray-500 uppercase mt-1">Nível</p>
                      </div>
-                     <div className="h-40 bg-white/5 rounded-3xl border border-white/5 p-6">
+                     <div className="h-40 bg-white/5 rounded-3xl border border-white/5 p-6 flex flex-col justify-between">
                         <Users className="text-primary w-6 h-6 mb-2" />
-                        <p className="text-2xl font-black">12</p>
-                        <p className="text-[10px] font-bold text-gray-500 uppercase mt-1">Operações</p>
+                        <p className="text-[11px] font-black leading-tight uppercase">C.O.A.F DIV. <br/> CONTESTADO</p>
+                        <p className="text-[10px] font-bold text-gray-500 uppercase mt-1">Equipe</p>
                      </div>
                   </div>
                </div>
