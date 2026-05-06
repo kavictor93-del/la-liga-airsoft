@@ -72,22 +72,22 @@ export default function Home() {
             <div className="relative h-[280px] md:h-[320px]">
                 {/* Banner 1: Sancreek */}
                 <div className={`absolute inset-0 transition-all duration-1000 transform ${activeBanner === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-[0.9] uppercase italic pr-10">
+                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-[0.9] uppercase italic pr-20">
                         Operação <br />
                         <span className="text-gradient">Sancreek Pt 2</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-400 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-6">
-                        O maior evento de MilSim do Planalto Norte. Garanta sua vaga no campo de batalha.
+                    <p className="text-xl md:text-2xl text-gray-400 font-bold max-w-3xl mx-auto lg:mx-0 leading-relaxed mt-6 uppercase tracking-tight">
+                        Os reis do faroeste no dia 17 de maio em Canoinhas, <span className="text-primary italic">Nova Data!</span>
                     </p>
                 </div>
 
                 {/* Banner 2: Dashboard/Idea */}
                 <div className={`absolute inset-0 transition-all duration-1000 transform ${activeBanner === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-[0.9] uppercase italic pr-10">
+                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-[0.9] uppercase italic pr-20">
                         Sua Carreira <br />
                         <span className="text-gradient">De Operador</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-400 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-6">
+                    <p className="text-xl md:text-2xl text-gray-400 font-bold max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-6 uppercase tracking-tight">
                         Gerencie suas missões, evolua sua patente e conquiste o topo do ranking.
                     </p>
                 </div>
