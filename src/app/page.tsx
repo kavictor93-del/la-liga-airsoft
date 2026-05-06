@@ -35,7 +35,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col">
                 <span className="font-black text-2xl tracking-tighter leading-none italic uppercase italic-none">LA LIGA</span>
-                <span className="text-[10px] font-bold tracking-[0.4em] text-primary uppercase">Planalto Norte</span>
+                <span className="text-[10px] font-bold tracking-[0.4em] text-primary uppercase">AIRSOFT APP</span>
             </div>
           </div>
           
@@ -69,7 +69,7 @@ export default function Home() {
                 <Award className="w-4 h-4" /> A ELITE DO AIRSOFT NACIONAL
             </div>
             
-            <div className="relative h-[200px] md:h-[240px]">
+            <div className="relative h-[280px] md:h-[320px]">
                 {/* Banner 1: Sancreek */}
                 <div className={`absolute inset-0 transition-all duration-1000 transform ${activeBanner === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
                     <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tight leading-[0.85] uppercase italic">
@@ -93,14 +93,14 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6 pt-12 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row items-center gap-8 pt-16 justify-center lg:justify-start">
                 <Link href="/login" className="w-full sm:w-auto">
-                    <button className="btn-elite bg-primary text-black shadow-[0_0_50px_rgba(255,107,0,0.3)] hover:scale-105 group w-full">
+                    <button className="btn-elite bg-primary text-black shadow-[0_0_50px_rgba(255,107,0,0.3)] hover:scale-105 group w-full mb-4 sm:mb-0">
                         ALISTAR-SE AGORA
                         <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                     </button>
                 </Link>
-                <div className="flex gap-2">
+                <div className="flex gap-3 items-center h-14">
                     <button 
                       onClick={() => setActiveBanner(0)}
                       className={`w-3 h-3 rounded-full transition-all ${activeBanner === 0 ? 'bg-primary w-8' : 'bg-white/20'}`} 

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "La Liga Airsoft | Plataforma de Elite",
+  title: "LA LIGA AIRSOFT APP | Plataforma de Elite",
   description: "Gestão de missões, ranking e marketplace para operadores de elite no Planalto Norte.",
 };
 

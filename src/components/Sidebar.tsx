@@ -43,7 +43,7 @@ export function Sidebar() {
             </div>
             <div>
               <h1 className="text-sm font-black uppercase tracking-tighter leading-none italic italic-none">LA LIGA</h1>
-              <p className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">PLANALTO NORTE</p>
+              <p className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">AIRSOFT APP</p>
             </div>
           </div>
 
