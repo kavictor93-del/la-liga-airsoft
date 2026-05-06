@@ -12,6 +12,7 @@ const menuItems = [
   { name: "Marketplace", icon: ShoppingBag, href: "/marketplace" },
   { name: "Equipes", icon: Users2, href: "/equipes" },
   { name: "Ranking", icon: Trophy, href: "/ranking" },
+  { name: "Painel do Org", icon: Target, href: "/organizador", admin: true },
 ];
 
 export function Sidebar() {
@@ -58,10 +59,12 @@ export function Sidebar() {
                   "flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all group",
                   pathname === item.href 
                     ? "bg-primary text-black shadow-[0_0_15px_rgba(255,107,0,0.2)]" 
-                    : "text-white/40 hover:text-white hover:bg-white/5"
+                    : item.admin 
+                      ? "text-primary/60 border border-primary/20 hover:bg-primary hover:text-black mt-10"
+                      : "text-white/40 hover:text-white hover:bg-white/5"
                 )}
               >
-                <item.icon className={cn("w-5 h-5", pathname === item.href ? "text-black" : "text-white/20 group-hover:text-primary")} />
+                <item.icon className={cn("w-5 h-5", pathname === item.href ? "text-black" : item.admin ? "text-primary" : "text-white/20 group-hover:text-primary")} />
                 {item.name}
               </Link>
             ))}
