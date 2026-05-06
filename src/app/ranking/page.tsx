@@ -73,7 +73,7 @@ export default function Ranking() {
                     </div>
                 </div>
 
-                <h3 className="text-2xl font-black uppercase tracking-tight italic italic-none group-hover:text-primary transition-colors">{player.name}</h3>
+                <h3 className="text-2xl font-black uppercase tracking-tighter italic pr-4 group-hover:text-primary transition-colors">{player.name}</h3>
                 <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-1 mb-8">{player.team}</p>
                 
                 <div className="w-full space-y-4">

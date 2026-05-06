@@ -72,7 +72,7 @@ export default function Home() {
             <div className="relative h-[280px] md:h-[320px]">
                 {/* Banner 1: Sancreek */}
                 <div className={`absolute inset-0 transition-all duration-1000 transform ${activeBanner === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tight leading-[0.85] uppercase italic">
+                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-[0.9] uppercase italic pr-10">
                         Operação <br />
                         <span className="text-gradient">Sancreek Pt 2</span>
                     </h1>
@@ -83,7 +83,7 @@ export default function Home() {
 
                 {/* Banner 2: Dashboard/Idea */}
                 <div className={`absolute inset-0 transition-all duration-1000 transform ${activeBanner === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tight leading-[0.85] uppercase italic">
+                    <h1 className="text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-[0.9] uppercase italic pr-10">
                         Sua Carreira <br />
                         <span className="text-gradient">De Operador</span>
                     </h1>
