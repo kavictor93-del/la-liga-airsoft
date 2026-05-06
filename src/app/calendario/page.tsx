@@ -1,10 +1,12 @@
+"use client"
+
 import { Sidebar } from "@/components/Sidebar";
 import { Calendar as CalendarIcon, MapPin, Users, Zap, Clock, ChevronRight, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const missions = [
   { name: "SANCREEK PT 2", date: "17 MAIO", time: "07:30", type: "MilSim / Velho Oeste", price: "Grátis", slots: "01/150", image: "/logo-liga.jpg", location: "Canoínhas" },
-  { name: "OPERAÇÃO EXEMPLO", date: "23 MAIO", time: "08:00", type: "MilSim", price: "R$ 45", slots: "00/40", image: "https://images.unsplash.com/photo-1595590424283-b8f17842773f?q=80&w=2070&auto=format&fit=crop", location: "Arena Warzone" },
+  { name: "MISSÃO EXEMPLO", date: "23 MAIO", time: "08:00", type: "MilSim", price: "R$ 45", slots: "00/40", image: "https://images.unsplash.com/photo-1595590424283-b8f17842773f?q=80&w=2070&auto=format&fit=crop", location: "Arena Warzone" },
 ];
 
 export default function Calendario() {

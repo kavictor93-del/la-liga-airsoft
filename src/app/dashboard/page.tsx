@@ -1,3 +1,5 @@
+"use client"
+
 import { Sidebar } from "@/components/Sidebar";
 import { Target, TrendingUp, Users, Shield, Zap, ChevronRight, Bell, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,7 +33,7 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* Quick Stats Grid */}
+        {/* Quick Stats Grid - ZERADO */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {[
             { label: "XP Total", value: "0", icon: Zap, trend: "Iniciante" },
@@ -66,7 +68,9 @@ export default function Dashboard() {
                 { name: "MISSÃO EXEMPLO", date: "SÁB, 23 MAIO", slots: "00/40", status: "Exemplo", color: "bg-white/10" },
               ].map((mission, i) => (
                 <div key={i} className="tactical-card group flex items-center p-4 hover:bg-white/5 cursor-pointer">
-                  <div className="w-16 h-16 bg-neutral-800 rounded-xl mr-4 overflow-hidden" />
+                  <div className="w-16 h-16 bg-neutral-800 rounded-xl mr-4 overflow-hidden flex items-center justify-center border border-white/5">
+                    <Target className="text-white/10 w-8 h-8" />
+                  </div>
                   <div className="flex-1">
                     <h4 className="font-bold text-sm uppercase tracking-tight group-hover:text-primary transition-colors">{mission.name}</h4>
                     <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest">{mission.date} // {mission.slots} vagas</p>
@@ -89,17 +93,17 @@ export default function Dashboard() {
                    <Shield className="w-40 h-40" />
                  </div>
                  <div className="text-center relative z-10">
-                   <p className="text-4xl font-black text-primary">#42</p>
-                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mt-1">Geral na Liga</p>
+                   <p className="text-4xl font-black text-primary">--</p>
+                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mt-1">Aguardando Missões</p>
                  </div>
               </div>
               <div className="space-y-2 mt-4">
                 <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest">
                   <span>Próximo Nível</span>
-                  <span className="text-primary">85%</span>
+                  <span className="text-primary">0%</span>
                 </div>
                 <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-primary w-[85%] shadow-[0_0_10px_rgba(255,107,0,0.5)]" />
+                  <div className="h-full bg-primary w-[2%] shadow-[0_0_10px_rgba(255,107,0,0.5)]" />
                 </div>
               </div>
             </div>
@@ -107,20 +111,14 @@ export default function Dashboard() {
             <div className="tactical-card p-6">
               <h3 className="text-lg font-black uppercase tracking-tighter mb-4">Feed da Tropa</h3>
               <div className="space-y-6">
-                {[
-                  { user: "Major_Viper", action: "alcançou patente Capitão", time: "2h atrás" },
-                  { user: "Wolf_One", action: "postou novo item no Market", time: "4h atrás" },
-                ].map((item, i) => (
-                  <div key={i} className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10" />
-                    <div className="flex-1">
-                      <p className="text-[10px] leading-tight">
-                        <span className="font-bold text-white">{item.user}</span> <span className="text-white/40">{item.action}</span>
-                      </p>
-                      <p className="text-[9px] text-primary/60 font-bold uppercase mt-1">{item.time}</p>
-                    </div>
+                <div className="flex gap-3 grayscale opacity-40">
+                  <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10" />
+                  <div className="flex-1">
+                    <p className="text-[10px] leading-tight">
+                      <span className="font-bold text-white">Sistema</span> <span className="text-white/40">Iniciando feed de operações...</span>
+                    </p>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
