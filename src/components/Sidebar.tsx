@@ -34,13 +34,16 @@ export function Sidebar() {
       )}>
         <div className="flex flex-col h-full p-6">
           {/* Logo */}
-          <div className="flex items-center gap-3 mb-10">
-            <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
-              <Target className="text-primary w-6 h-6" />
+          <div className="flex items-center gap-3 mb-10 group cursor-pointer">
+            <div className="w-12 h-12 relative">
+              <div className="absolute -inset-1 bg-primary/20 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="w-full h-full bg-white/5 rounded-xl flex items-center justify-center border border-white/10 overflow-hidden relative z-10">
+                <img src="/logo-liga.jpg" alt="Logo" className="w-full h-full object-cover" />
+              </div>
             </div>
             <div>
-              <h1 className="text-sm font-black uppercase tracking-tighter leading-none">LA LIGA</h1>
-              <p className="text-[10px] font-bold text-primary tracking-widest uppercase">AIRSOFT</p>
+              <h1 className="text-sm font-black uppercase tracking-tighter leading-none italic italic-none">LA LIGA</h1>
+              <p className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">PLANALTO NORTE</p>
             </div>
           </div>
 
