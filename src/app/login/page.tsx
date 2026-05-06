@@ -2,27 +2,81 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Target, Shield, Zap, ArrowRight, UserPlus, LogIn, CheckCircle2 } from "lucide-react";
+import { Target, Shield, Zap, ArrowRight, UserPlus, LogIn, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase";
 
 export default function LoginPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const supabase = createClient();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    fullName: "",
+    username: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
     
-    // Simula processamento
-    setTimeout(() => {
+    try {
+      if (isRegistering) {
+        // 1. Sign Up User
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (authError) throw authError;
+
+        if (authData.user) {
+          // 2. Create Profile in 'profiles' table
+          const { error: profileError } = await supabase
+            .from('profiles')
+            .insert([
+              { 
+                id: authData.user.id, 
+                username: formData.username, 
+                full_name: formData.fullName,
+                level: 'Recruta',
+                xp: 0,
+                role: 'player'
+              }
+            ]);
+
+          if (profileError) throw profileError;
+        }
+      } else {
+        // Sign In
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (signInError) throw signInError;
+      }
+
       setLoading(false);
       setSuccess(true);
       setTimeout(() => {
         router.push("/dashboard");
       }, 1500);
-    }, 2000);
+
+    } catch (err: any) {
+      setError(err.message || "Erro ao processar sua solicitação.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,8 +96,8 @@ export default function LoginPage() {
               <Target className="text-primary w-8 h-8" />
             </div>
             <div className="text-left">
-              <h1 className="text-xl font-black uppercase tracking-tighter leading-none italic">LA LIGA</h1>
-              <p className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">Área do Operador</p>
+              <h1 className="text-xl font-black uppercase tracking-tighter leading-none italic italic-none">LA LIGA</h1>
+              <p className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">AIRSOFT APP</p>
             </div>
           </div>
           
@@ -66,34 +120,64 @@ export default function LoginPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <div className="bg-red-500/10 border border-red-500/50 p-4 rounded-xl flex items-center gap-3 animate-in fade-in slide-in-from-top-1">
+                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                  <p className="text-[10px] font-bold uppercase text-red-500 tracking-widest">{error}</p>
+                </div>
+              )}
+
               <div className="space-y-4">
                 {isRegistering && (
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Nome Completo</label>
-                    <input 
-                      required
-                      type="text" 
-                      placeholder="NOME DE BATISMO" 
-                      className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-xs font-bold uppercase tracking-widest focus:border-primary/50 outline-none transition-all"
-                    />
-                  </div>
+                  <>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Nome Completo</label>
+                      <input 
+                        required
+                        type="text" 
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        placeholder="NOME DE BATISMO" 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-xs font-bold uppercase tracking-widest focus:border-primary/50 outline-none transition-all"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Callsign (Apelido)</label>
+                      <input 
+                        required
+                        type="text" 
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="EX: GHOST_OPERATOR" 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-xs font-bold uppercase tracking-widest focus:border-primary/50 outline-none transition-all"
+                      />
+                    </div>
+                  </>
                 )}
                 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Callsign (Apelido)</label>
+                  <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Email Militar</label>
                   <input 
                     required
-                    type="text" 
-                    placeholder="EX: GHOST_OPERATOR" 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="operador@laliga.com" 
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-xs font-bold uppercase tracking-widest focus:border-primary/50 outline-none transition-all"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Código de Acesso</label>
+                  <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Código de Acesso (Senha)</label>
                   <input 
                     required
                     type="password" 
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     placeholder="••••••••" 
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-xs focus:border-primary/50 outline-none transition-all"
                   />
