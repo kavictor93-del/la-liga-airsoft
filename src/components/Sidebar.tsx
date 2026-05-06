@@ -1,10 +1,11 @@
 "use client"
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, ShoppingBag, Users2, Calendar, User, LogOut, Target, Menu, X, Trophy } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase";
 
 const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
@@ -17,7 +18,30 @@ const menuItems = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [profile, setProfile] = useState<any>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        setProfile(data);
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/");
+  };
 
   return (
     <>
@@ -34,8 +58,8 @@ export function Sidebar() {
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="flex flex-col h-full p-6">
-          {/* Logo */}
-          <div className="flex items-center gap-3 mb-10 group cursor-pointer">
+          {/* Logo - Agora Clicável */}
+          <Link href="/" className="flex items-center gap-3 mb-10 group cursor-pointer">
             <div className="w-12 h-12 relative">
               <div className="absolute -inset-1 bg-primary/20 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="w-full h-full bg-white/5 rounded-xl flex items-center justify-center border border-white/10 overflow-hidden relative z-10">
@@ -46,7 +70,7 @@ export function Sidebar() {
               <h1 className="text-sm font-black uppercase tracking-tighter leading-none italic italic-none">LA LIGA</h1>
               <p className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">AIRSOFT APP</p>
             </div>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="flex-1 space-y-2">
@@ -77,12 +101,15 @@ export function Sidebar() {
                 <div className="w-full h-full bg-gradient-to-tr from-primary to-orange-300" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold truncate">Ghost_Operator</p>
-                <p className="text-[10px] text-primary font-bold uppercase">Patente: Sargento</p>
+                <p className="text-xs font-bold truncate">{profile?.username || "Operador"}</p>
+                <p className="text-[10px] text-primary font-bold uppercase">Patente: {profile?.level || "Recruta"}</p>
               </div>
             </div>
             
-            <button className="flex items-center gap-3 px-3 py-2 w-full text-white/30 text-xs hover:text-red-500 transition-colors">
+            <button 
+              onClick={handleLogout}
+              className="flex items-center gap-3 px-3 py-2 w-full text-white/30 text-xs hover:text-red-500 transition-colors"
+            >
               <LogOut className="w-4 h-4" />
               Encerrar Sessão
             </button>
