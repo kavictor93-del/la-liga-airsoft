@@ -46,7 +46,6 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile Toggle */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-4 left-4 z-[100] md:hidden p-2 bg-secondary rounded-lg border border-white/10"
@@ -59,7 +58,6 @@ export function Sidebar() {
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="flex flex-col h-full p-6">
-          {/* Logo - Agora Clicável */}
           <Link href="/" className="flex items-center gap-3 mb-10 group cursor-pointer">
             <div className="w-12 h-12 relative">
               <div className="absolute -inset-1 bg-primary/20 blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -73,7 +71,6 @@ export function Sidebar() {
             </div>
           </Link>
 
-          {/* Navigation */}
           <nav className="flex-1 space-y-2">
             <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em] mb-4 px-3">Protocolo Principal</p>
             {menuItems.map((item) => (
@@ -95,7 +92,6 @@ export function Sidebar() {
             ))}
           </nav>
 
-          {/* User Profile Footer */}
           <div className="mt-auto pt-6 border-t border-white/5">
             <div className="flex items-center gap-3 p-2 bg-white/5 rounded-2xl mb-4">
               <div className="w-10 h-10 rounded-full bg-neutral-800 border-2 border-primary/50 overflow-hidden">
@@ -120,3 +116,4 @@ export function Sidebar() {
     </>
   );
 }
+// FINALIZADO PELO CLAUDE

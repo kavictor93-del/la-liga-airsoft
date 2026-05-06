@@ -1,4 +1,5 @@
 "use client"
+// MUDANCA FORCADA PELO CLAUDE PARA O GITHUB DESKTOP ACORDAR
 
 import { Target, Shield, ShoppingBag, Users, ChevronRight, Zap, Trophy, Award, Star, ArrowRight, LayoutDashboard, Globe, MousePointer2 } from "lucide-react";
 import Link from "next/link";

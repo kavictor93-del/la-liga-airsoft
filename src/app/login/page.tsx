@@ -32,7 +32,6 @@ export default function LoginPage() {
 
     try {
       if (isRegistering) {
-        // 1. Sign Up User with Real Email
         const { data: authData, error: authError } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
@@ -47,7 +46,6 @@ export default function LoginPage() {
         if (authError) throw authError;
 
         if (authData.user) {
-          // 2. Create Profile in 'profiles' table
           const { error: profileError } = await supabase
             .from('profiles')
             .insert([
@@ -65,10 +63,9 @@ export default function LoginPage() {
           
           setSuccess(true);
           setLoading(false);
-          return; // Wait for email confirmation message
+          return;
         }
       } else {
-        // Sign In
         const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
@@ -76,7 +73,6 @@ export default function LoginPage() {
 
         if (signInError) throw signInError;
 
-        // Check if email is confirmed
         if (signInData.user && !signInData.user.email_confirmed_at) {
           setError("Por favor, verifique seu email antes de acessar.");
           setLoading(false);
@@ -98,8 +94,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white selection:bg-primary selection:text-black flex items-center justify-center p-6 relative overflow-hidden">
-      
-      {/* Background Decor */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-primary/5 blur-[120px] rounded-full"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-orange-900/5 blur-[120px] rounded-full"></div>
@@ -242,15 +236,15 @@ export default function LoginPage() {
             </form>
           )}
 
-          {/* Tactical Decor */}
           <div className="absolute -top-px -left-px w-6 h-6 border-t border-l border-primary/40 rounded-tl-xl" />
           <div className="absolute -bottom-px -right-px w-6 h-6 border-b border-r border-primary/40 rounded-br-xl" />
         </div>
 
         <p className="text-[9px] text-white/10 text-center mt-10 font-black uppercase tracking-[0.4em]">
-          SISTEMA DE SEGURANÇA ALPHA v2.4 // VERIFICAÇÃO DE IDENTIDADE OBRIGATÓRIA
+          SISTEMA DE SEGURANÇA ALPHA v2.4 // VERIFICAÇÃO OBRIGATÓRIA
         </p>
       </div>
     </div>
   );
 }
+// FINALIZADO PELO CLAUDE
