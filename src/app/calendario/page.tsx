@@ -3,10 +3,8 @@ import { Calendar as CalendarIcon, MapPin, Users, Zap, Clock, ChevronRight, Chev
 import { cn } from "@/lib/utils";
 
 const missions = [
-  { name: "SANCREEK PT 2", date: "17 MAIO", time: "07:30", type: "MilSim / Velho Oeste", price: "R$ 50", slots: "32/60", image: "/sancreek-event.png", location: "Canoínhas" },
-  { name: "Operação: Black Gold", date: "25 OUT", time: "08:00", type: "MilSim", price: "R$ 45", slots: "12/40", image: "https://images.unsplash.com/photo-1595590424283-b8f17842773f?q=80&w=2070&auto=format&fit=crop", location: "Arena Warzone" },
-  { name: "Treino Tático CQB", date: "26 OUT", time: "19:00", type: "Treino", price: "Grátis", slots: "08/20", image: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=2070&auto=format&fit=crop", location: "Arena Warzone" },
-  { name: "Resgate no Setor 7", date: "01 NOV", time: "07:30", type: "CQB", price: "R$ 60", slots: "00/30", image: "https://images.unsplash.com/photo-1509191432712-42907406649f?q=80&w=2070&auto=format&fit=crop", location: "Arena Warzone" },
+  { name: "SANCREEK PT 2", date: "17 MAIO", time: "07:30", type: "MilSim / Velho Oeste", price: "Grátis", slots: "01/150", image: "/logo-liga.jpg", location: "Canoínhas" },
+  { name: "OPERAÇÃO EXEMPLO", date: "23 MAIO", time: "08:00", type: "MilSim", price: "R$ 45", slots: "00/40", image: "https://images.unsplash.com/photo-1595590424283-b8f17842773f?q=80&w=2070&auto=format&fit=crop", location: "Arena Warzone" },
 ];
 
 export default function Calendario() {
@@ -23,7 +21,7 @@ export default function Calendario() {
           
           <div className="flex items-center gap-2">
             <button className="p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors"><ChevronLeft className="w-5 h-5 text-white/40" /></button>
-            <div className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-xs font-black uppercase tracking-widest">Outubro 2026</div>
+            <div className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-xs font-black uppercase tracking-widest">Maio 2026</div>
             <button className="p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors"><ChevronRight className="w-5 h-5 text-white/40" /></button>
           </div>
         </header>

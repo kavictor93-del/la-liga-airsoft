@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
 
 const menuItems = [
+  { name: "Página Inicial", icon: LayoutDashboard, href: "/" },
   { name: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
   { name: "Missões", icon: Calendar, href: "/calendario" },
   { name: "Marketplace", icon: ShoppingBag, href: "/marketplace" },

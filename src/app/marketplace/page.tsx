@@ -24,7 +24,7 @@ export default function Marketplace() {
         <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
           <div>
             <h2 className="text-4xl font-black uppercase tracking-tighter gradient-text">Marketplace <span className="text-primary italic-none">Tático</span></h2>
-            <p className="text-white/40 text-[10px] font-bold uppercase tracking-[0.3em] mt-2">Negocie equipamentos de elite // Alpha Market</p>
+            <p className="text-white/40 text-[10px] font-bold uppercase tracking-[0.3em] mt-2">ANUNCIANTES E LOJISTAS // ESPAÇO DISPONÍVEL</p>
           </div>
           
           <div className="flex items-center gap-3 w-full md:w-auto">

@@ -12,7 +12,7 @@ export default function Dashboard() {
         <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter gradient-text">Bem-vindo, <span className="text-primary italic-none">Operador</span></h2>
-            <p className="text-white/40 text-xs font-bold uppercase tracking-[0.2em] mt-1">Status do Sistema: <span className="text-green-500">Operacional</span> // 23 OUT 2026</p>
+            <p className="text-white/40 text-xs font-bold uppercase tracking-[0.2em] mt-1">Status do Sistema: <span className="text-green-500">Operacional</span> // 06 MAIO 2026</p>
           </div>
           
           <div className="flex items-center gap-4 w-full md:w-auto">
@@ -34,10 +34,10 @@ export default function Dashboard() {
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {[
-            { label: "XP Total", value: "14,250", icon: Zap, trend: "+12%" },
-            { label: "Missões", value: "24", icon: Target, trend: "Rank #12" },
-            { label: "Equipe", value: "Alpha Team", icon: Shield, trend: "Líder" },
-            { label: "Saldo", value: "R$ 150,00", icon: TrendingUp, trend: "Recarga" },
+            { label: "XP Total", value: "0", icon: Zap, trend: "Iniciante" },
+            { label: "Missões", value: "0", icon: Target, trend: "Recruta" },
+            { label: "Equipe", value: "Sem Equipe", icon: Shield, trend: "Alistar" },
+            { label: "Saldo", value: "R$ 0,00", icon: TrendingUp, trend: "Recarga" },
           ].map((stat, i) => (
             <div key={i} className="tactical-card p-6 flex items-center gap-4">
               <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
@@ -62,8 +62,8 @@ export default function Dashboard() {
 
             <div className="space-y-4">
               {[
-                { name: "OP: Sombras do Deserto", date: "Sáb, 25 Out", slots: "12/40", status: "Confirmado", color: "bg-green-500" },
-                { name: "Treino Tático CQB", date: "Dom, 26 Out", slots: "08/20", status: "Pendente", color: "bg-orange-500" },
+                { name: "SANCREEK PT 2", date: "DOM, 17 MAIO", slots: "01/150", status: "Confirmado", color: "bg-green-500" },
+                { name: "MISSÃO EXEMPLO", date: "SÁB, 23 MAIO", slots: "00/40", status: "Exemplo", color: "bg-white/10" },
               ].map((mission, i) => (
                 <div key={i} className="tactical-card group flex items-center p-4 hover:bg-white/5 cursor-pointer">
                   <div className="w-16 h-16 bg-neutral-800 rounded-xl mr-4 overflow-hidden" />
