@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Target, Shield, Zap, ArrowRight, UserPlus, LogIn, CheckCircle2, AlertCircle } from "lucide-react";
+import { Target, Shield, Zap, ArrowRight, UserPlus, LogIn, CheckCircle2, AlertCircle, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
 
@@ -29,13 +29,19 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
       if (isRegistering) {
-        // 1. Sign Up User
+        // 1. Sign Up User with Real Email
         const { data: authData, error: authError } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
+          options: {
+            data: {
+              full_name: formData.fullName,
+              username: formData.username,
+            }
+          }
         });
 
         if (authError) throw authError;
@@ -56,15 +62,26 @@ export default function LoginPage() {
             ]);
 
           if (profileError) throw profileError;
+          
+          setSuccess(true);
+          setLoading(false);
+          return; // Wait for email confirmation message
         }
       } else {
         // Sign In
-        const { error: signInError } = await supabase.auth.signInWithPassword({
+        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
         });
 
         if (signInError) throw signInError;
+
+        // Check if email is confirmed
+        if (signInData.user && !signInData.user.email_confirmed_at) {
+          setError("Por favor, verifique seu email antes de acessar.");
+          setLoading(false);
+          return;
+        }
       }
 
       setLoading(false);
@@ -74,7 +91,7 @@ export default function LoginPage() {
       }, 1500);
 
     } catch (err: any) {
-      setError(err.message || "Erro ao processar sua solicitação.");
+      setError(err.message === "Invalid login credentials" ? "Email ou Senha incorretos." : err.message);
       setLoading(false);
     }
   };
@@ -110,7 +127,21 @@ export default function LoginPage() {
         </div>
 
         <div className="tactical-card p-8 bg-black/40 backdrop-blur-xl border-white/5 shadow-2xl relative">
-          {success ? (
+          {success && isRegistering ? (
+            <div className="py-10 text-center space-y-4 animate-in zoom-in duration-500">
+               <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center border border-primary/50 mx-auto">
+                  <Mail className="w-10 h-10 text-primary animate-bounce" />
+               </div>
+               <h3 className="text-2xl font-black uppercase tracking-tight italic">Quase lá, Operador!</h3>
+               <p className="text-white/40 text-[10px] font-black uppercase tracking-widest">Enviamos um link de confirmação para o seu email. Verifique-o para liberar seu acesso.</p>
+               <button 
+                onClick={() => { setIsRegistering(false); setSuccess(false); }}
+                className="text-[10px] font-black text-primary hover:underline uppercase tracking-widest pt-4"
+               >
+                 Voltar para o Login
+               </button>
+            </div>
+          ) : success ? (
             <div className="py-10 text-center space-y-4 animate-in zoom-in duration-500">
                <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center border border-green-500/50 mx-auto">
                   <CheckCircle2 className="w-10 h-10 text-green-500" />
@@ -158,15 +189,15 @@ export default function LoginPage() {
                 )}
                 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Email Militar</label>
+                  <label className="text-[10px] font-black uppercase text-white/40 tracking-widest ml-1">Email Real</label>
                   <input 
                     required
                     type="email" 
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="operador@laliga.com" 
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-xs font-bold uppercase tracking-widest focus:border-primary/50 outline-none transition-all"
+                    placeholder="seu@email.com" 
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-xs font-bold focus:border-primary/50 outline-none transition-all"
                   />
                 </div>
 
@@ -193,7 +224,7 @@ export default function LoginPage() {
                   <span className="animate-pulse">PROCESSANDO...</span>
                 ) : (
                   <>
-                    {isRegistering ? "FINALIZAR ALISTAMENTO" : "INICIAR SESSÃO"}
+                    {isRegistering ? "SOLICITAR ALISTAMENTO" : "INICIAR SESSÃO"}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
@@ -217,7 +248,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-[9px] text-white/10 text-center mt-10 font-black uppercase tracking-[0.4em]">
-          SISTEMA DE SEGURANÇA ALPHA v2.4 // PROTOCOLO DE ENCRIPTAÇÃO ATIVO
+          SISTEMA DE SEGURANÇA ALPHA v2.4 // VERIFICAÇÃO DE IDENTIDADE OBRIGATÓRIA
         </p>
       </div>
     </div>
